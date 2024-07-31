@@ -12,9 +12,9 @@ public static class ApplicationServiceExtensions
     public static IServiceCollection AddApplicationServiceExtensions(this IServiceCollection services, IConfiguration config)
     {
         services.AddControllers();
-        services.AddDbContext<DataContext>(options =>
+        services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options =>
         {
-            options.UseSqlite(config.GetConnectionString("DefaultConnection"));
+            options.UseNpgsql(config.GetConnectionString("SampleDbConnection"));
         });
         services.AddCors();
         services.AddAutoMapper(typeof(MappingProfiles).Assembly);
