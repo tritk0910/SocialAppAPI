@@ -14,7 +14,7 @@ public static class ApplicationServiceExtensions
         services.AddControllers();
         services.AddEntityFrameworkNpgsql().AddDbContext<DataContext>(options =>
         {
-            options.UseNpgsql(config.GetConnectionString("SampleDbConnection"));
+            options.UseNpgsql(config.GetConnectionString("DefaultConnection"));
         });
         services.AddCors();
         services.AddAutoMapper(typeof(MappingProfiles).Assembly);

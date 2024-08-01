@@ -3,6 +3,7 @@ using Application.Interfaces;
 using AutoMapper;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using Persistence;
 
 namespace Application.Repositories;
@@ -14,7 +15,8 @@ public class CommentRepository(DataContext context, IMapper mapper) : ICommentRe
         var comment = mapper.Map<Comment>(commentDto);
         context.Comments.Add(comment);
         await context.SaveChangesAsync();
-        return commentDto;
+        var result = mapper.Map<CommentDto>(comment);
+        return result;
     }
 
     public async Task<bool> DeleteCommentAsync(int id)
